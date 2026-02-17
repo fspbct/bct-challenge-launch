@@ -1,0 +1,93 @@
+/* CURTAINS */
+.curtain {
+  position: fixed;
+  top: 0;
+  width: 50vw;
+  height: 100vh;
+  z-index: 10;
+  background: repeating-linear-gradient(
+    90deg,
+    #7a0000,
+    #7a0000 12px,
+    #8b0000 12px,
+    #8b0000 24px
+  );
+}
+
+/* Left curtain starts at center */
+.curtain.left {
+  left: 50%;
+  transform: translateX(-100%);
+  animation: openLeftCurtain 2.8s ease-in-out forwards;
+}
+
+/* Right curtain starts at center */
+.curtain.right {
+  left: 50%;
+  animation: openRightCurtain 2.8s ease-in-out forwards;
+}
+
+/* LEFT curtain moves LEFT */
+@keyframes openLeftCurtain {
+  to {
+    transform: translateX(-200%);
+  }
+}
+
+/* RIGHT curtain moves RIGHT */
+@keyframes openRightCurtain {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+
+/* CONTENT */
+.content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  animation: revealContent 1.5s ease forwards;
+  animation-delay: 3s;
+  animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+box-shadow: inset -10px 0 20px rgba(0,0,0,0.4);
+.curtain.right {
+  box-shadow: inset 10px 0 20px rgba(0,0,0,0.4);
+}
+
+}
+
+
+/* Content reveal */
+@keyframes revealContent {
+  to {
+    opacity: 1;
+  }
+}
+
+/* LOGO */
+.logo {
+  width: 220px;
+  margin-bottom: 30px;
+}
+
+/* BUTTON */
+.launch-btn {
+  padding: 15px 40px;
+  font-size: 20px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background: #ffcc00;
+  font-weight: bold;
+  transition: transform 0.3s ease;
+}
+
+.launch-btn:hover {
+  transform: scale(1.05);
+}
+

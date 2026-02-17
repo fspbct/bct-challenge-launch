@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Blockchain India Challenge | Official Launch</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- Soft Curtain Opening Sound -->
+  <audio id="curtainSound" preload="auto">
+    <source src="curtain-open.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Curtains -->
+  <div class="curtain left"></div>
+  <div class="curtain right"></div>
+
+  <!-- Center Content -->
+  <main class="content" role="main">
+
+    <!-- Event Header -->
+    <div class="event-header">
+      <img src="logo-3.png" class="logo" alt="Startup Challenge Logo" />
+      <h1>Launch of</h1>
+      <h2>Blockchain India Challenge</h2>
+      <p>Startup Challenge driven by Blockchain & Web3 Innovation</p>
+      <p class="ministry">Ministry of Electronics and Information Technology</p>
+    </div>
+
+    <!-- Event Details -->
+    <div class="event-details">
+      <h3>Chief Guest</h3>
+      <h4>Shri S. Krishnan IAS</h4>
+      <p class="role">Secretary, MeitY</p>
+      <div class="date">23<sup>rd</sup> February, 2026</div>
+    </div>
+
+    <!-- Launch Button -->
+    <button class="launch-btn" onclick="launchSite()" aria-label="Launch Portal">
+      LAUNCH PORTAL<br />
+      <span class="btn-hi">पोर्टल प्रारंभ करें</span>
+    </button>
+
+    <!-- Countdown Timer -->
+    <!-- <div class="countdown" id="countdown">
+      <div class="countdown-item">
+        <span id="days">00</span>
+        <span>Days</span>
+      </div>
+      <div class="countdown-item">
+        <span id="hours">00</span>
+        <span>Hours</span>
+      </div>
+      <div class="countdown-item">
+        <span id="minutes">00</span>
+        <span>Minutes</span>
+      </div>
+      <div class="countdown-item">
+        <span id="seconds">00</span>
+        <span>Seconds</span>
+      </div>
+    </div> -->
+
+    <!-- Background Particles -->
+    <canvas id="particles" class="particles"></canvas>
+
+  </main>
+
+  <!-- ✅ ALL JAVASCRIPT MUST BE INSIDE SCRIPT TAG -->
+  <script>
+    /* ---------------- Curtain Sound ---------------- */
+    window.addEventListener("load", () => {
+      const sound = document.getElementById("curtainSound");
+      if (sound) {
+        sound.volume = 0.35;
+        sound.play().catch(() => {});
+      }
+    });
+
+    function launchSite() {
+      window.location.href = "https://challenge.cdac.in";
+    }
+
+    /* ---------------- Countdown ---------------- */
+    const launchDate = new Date("2026-02-23T10:00:00+05:30").getTime();
+
+    function countdown() {
+      const now = Date.now();
+      const distance = launchDate - now;
+
+      if (distance < 0) return;
+
+      document.getElementById("days").textContent =
+        Math.floor(distance / (1000 * 60 * 60 * 24));
+
+      document.getElementById("hours").textContent =
+        Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+      document.getElementById("minutes").textContent =
+        Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+      document.getElementById("seconds").textContent =
+        Math.floor((distance % (1000 * 60)) / 1000);
+    }
+
+    setInterval(countdown, 1000);
+    countdown();
+
+    /* ---------------- Particle Animation ---------------- */
+    const canvas = document.getElementById("particles");
+    const ctx = canvas.getContext("2d");
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+
+    const particles = [];
+    for (let i = 0; i < 50; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        radius: Math.random() * 2 + 1
+      });
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(255, 204, 0, 0.3)";
+        ctx.fill();
+
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+      });
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+    window.addEventListener("resize", resizeCanvas);
+  </script>
+
+</body>
+</html>

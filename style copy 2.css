@@ -1,0 +1,235 @@
+/* MINISTRY-GRADE PROFESSIONAL */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(circle at center, #0a0a1a 0%, #000 100%);
+  overflow: hidden;
+  font-family: 'Poppins', Arial, sans-serif;
+  color: white;
+}
+
+/* PARTICLES LAYER */
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* CURTAINS (unchanged - perfect) */
+.curtain {
+  position: fixed;
+  top: 0;
+  width: 50vw;
+  height: 100vh;
+  z-index: 10;
+  background: repeating-linear-gradient(90deg, #7a0000, #7a0000 12px, #8b0000 12px, #8b0000 24px);
+}
+.curtain.left {
+  left: 50%;
+  transform: translateX(-100%);
+  animation: openLeftCurtain 2.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  box-shadow: inset -10px 0 20px rgba(0,0,0,0.6);
+}
+.curtain.right {
+  left: 50%;
+  animation: openRightCurtain 2.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  box-shadow: inset 10px 0 20px rgba(0,0,0,0.6);
+}
+@keyframes openLeftCurtain { to { transform: translateX(-200%); } }
+@keyframes openRightCurtain { to { transform: translateX(100%); } }
+
+/* PERFECTLY CENTERED CONTENT */
+.content {
+  position: fixed; /* Changed from absolute for perfect centering */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Bulletproof centering */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  animation: revealContent 2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+  animation-delay: 3s;
+  text-align: center;
+  padding: 3rem 2rem;
+  max-width: 700px;
+  z-index: 5;
+  gap: 1.5rem;
+}
+
+/* Content Reveal with Glow */
+@keyframes revealContent {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* LOGO WITH EMBLEM GLOW */
+.logo {
+  width: 240px;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 20px rgba(255, 204, 0, 0.5)) drop-shadow(0 4px 8px rgba(0,0,0,0.5));
+  animation: logoGlow 2s ease-in-out infinite alternate;
+}
+@keyframes logoGlow {
+  from { filter: drop-shadow(0 0 20px rgba(255, 204, 0, 0.5)); }
+  to { filter: drop-shadow(0 0 30px rgba(255, 204, 0, 0.8)); }
+}
+
+/* MeitY Header Typography */
+.event-header h1 {
+  font-size: 2rem;
+  background: linear-gradient(135deg, #ffcc00, #ffd700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0.5rem 0;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.event-header h2 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  background: linear-gradient(135deg, #0066cc, #1e40af, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 0.5rem 0;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.event-header p { 
+  font-size: 1.1rem;
+  color: #13137c;
+  margin: 0.3rem 0;
+  font-weight: 400;
+}
+.ministry {
+  font-size: 0.95rem;
+  color: #60a5fa;
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+/* Chief Guest Card */
+.event-details {
+  background: linear-gradient(145deg, rgba(30, 58, 138, 0.4), rgba(15, 23, 42, 0.6));
+  backdrop-filter: blur(20px);
+  padding: 2rem 2.5rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 204, 0, 0.3);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+  margin-bottom: 2rem;
+}
+.event-details h3 {
+  color: #ffcc00;
+  font-size: 1.3rem;
+  margin: 0 0 0.8rem 0;
+  font-weight: 600;
+}
+.event-details h4 {
+  font-size: 1.9rem;
+  color: #ffffff;
+  margin: 0 0 0.3rem 0;
+  font-weight: 700;
+}
+.role {
+  color: #093b74;
+  font-size: 1.15rem;
+  margin: 0;
+  font-weight: 500;
+}
+.date {
+  font-size: 1.6rem;
+  background: linear-gradient(135deg, #ffcc00, #ffd700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+/* COUNTDOWN */
+.countdown {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+  font-family: 'Poppins', sans-serif;
+}
+.countdown-item {
+  background: linear-gradient(145deg, rgba(255,204,0,0.2), rgba(255,215,0,0.1));
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255,204,0,0.3);
+  min-width: 70px;
+  text-align: center;
+}
+.countdown-item span:first-child {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #ffcc00;
+  text-shadow: 0 0 10px rgba(255,204,0,0.5);
+}
+.countdown-item span:last-child {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* PREMIUM BUTTON */
+.launch-btn {
+  position: relative;
+  padding: 18px 50px;
+  font-size: 1.3rem;
+  border-radius: 50px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  background: linear-gradient(135deg, #ffcc00, #ffd700);
+  color: #1e3a8a;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  box-shadow: 
+    0 15px 35px rgba(255, 204, 0, 0.4),
+    inset 0 1px 0 rgba(255,255,255,0.3);
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.launch-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  transition: left 0.6s;
+}
+.launch-btn:hover::before { left: 100%; }
+.launch-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 
+    0 25px 50px rgba(255, 204, 0, 0.6),
+    inset 0 1px 0 rgba(255,255,255,0.4);
+}
+.btn-hi {
+  font-size: 0.85em;
+  display: block;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+/* RESPONSIVE PERFECTION */
+@media (max-width: 768px) {
+  .content { padding: 2rem 1.5rem; gap: 1rem; }
+  .event-header h2 { font-size: 2.2rem !important; }
+  .logo { width: 200px; }
+  .event-details { padding: 1.5rem; }
+  .countdown { flex-wrap: wrap; gap: 0.5rem; }
+  .launch-btn { padding: 16px 40px; font-size: 1.2rem; }
+}
