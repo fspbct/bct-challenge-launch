@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="jquery.min.js"></script>
+
+<style>
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Helvetica, Arial, sans-serif;
+  overflow: hidden;
+  background-color: #000;
+}
+
+/* FULL SCREEN STAGE */
+#effect {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("Blockchain India challenge-2.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  overflow: hidden;
+}
+
+/* Curtains */
+#curtain1,
+#curtain2 {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  object-fit: cover;
+  z-index: 5;
+}
+
+#curtain1 { left: 0; }
+#curtain2 { right: 0; }
+
+/* Bottom control area */
+#curtain_buttons {
+  position: fixed;
+  bottom: 30px;
+  width: 100%;
+  text-align: center;
+  z-index: 10;
+}
+
+/* Buttons */
+#curtain_buttons input {
+  width: 160px;
+  height: 45px;
+  margin: 0 10px;
+  border-radius: 4px;
+  color: black;
+  font-size: 20px;
+  background-color: #f59e0b;
+  border: none;
+  cursor: pointer;
+}
+
+/* Countdown (replaces buttons) */
+#countdown {
+  display: none;
+  font-size: 22px;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 1px;
+  text-shadow: 0 0 12px rgba(0,0,0,0.8);
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  #curtain_buttons input {
+    width: 140px;
+  }
+
+  #countdown {
+    font-size: 18px;
+  }
+}
+</style>
+
+<script>
+let countdownInterval;
+
+function open_curtain() {
+  const snd = new Audio("applause.mp3");
+  snd.play();
+
+  $("#curtain1").animate({ width: "0%" }, 1200);
+  $("#curtain2").animate({ width: "0%" }, 1200);
+
+  // Hide buttons and show countdown in same place
+  $("#launchBtn, #closeBtn").fadeOut(300, function () {
+    $("#countdown").fadeIn();
+    startCountdown(5);
+  });
+}
+
+function startCountdown(seconds) {
+  let remaining = seconds;
+  $("#countdown").text(`Redirecting in ${remaining} seconds`);
+
+  countdownInterval = setInterval(() => {
+    remaining--;
+    $("#countdown").text(`Redirecting in ${remaining} seconds`);
+
+    if (remaining <= 0) {
+      clearInterval(countdownInterval);
+      window.location.href = "https://challenge.cdac.in";
+    }
+  }, 1000);
+}
+
+function close_curtain() {
+  clearInterval(countdownInterval);
+
+  $("#countdown").hide();
+  $("#launchBtn, #closeBtn").fadeIn();
+
+  $("#curtain1").animate({ width: "50%" }, 1200);
+  $("#curtain2").animate({ width: "50%" }, 1200);
+}
+</script>
+</head>
+
+<body>
+
+<div id="effect">
+  <img src="curtain1.jpg" id="curtain1" alt="Left Curtain">
+  <img src="curtain2.jpg" id="curtain2" alt="Right Curtain">
+</div>
+
+<div id="curtain_buttons">
+  <input type="button" id="launchBtn" value="Launch" onclick="open_curtain()">
+  <input type="button" id="closeBtn" value="Close" onclick="close_curtain()">
+  <div id="countdown"></div>
+</div>
+
+</body>
+</html>
